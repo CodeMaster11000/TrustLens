@@ -6,9 +6,32 @@
     <title>TrustLens — Inspect the Unseen Scams</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-red-600 selection:text-white">
     <div class="min-h-screen">
-        <nav id="main-navbar" class="h-16 bg-blue-600"></nav>
+        
+
+        <nav id="main-navbar" class="sticky top-0 z-50 h-16 w-full border-b border-neutral-800/80 bg-neutral-950/80 backdrop-blur-md transition-all">
+            <div class="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                
+                <a href="#" class="flex items-center gap-3 font-bold text-xl tracking-wider text-white hover:opacity-90 transition-opacity">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-red-950/40 border border-red-600/50 text-red-500 shadow-[0_0_12px_rgba(220,38,38,0.3)]">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.5 9l-5 8.5M9.5 9l5 8.5M6 12h12"></path>
+                        </svg>
+                    </span>
+                    <span>Trust<span class="text-red-600">Lens</span></span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-neutral-400">
+                    <a href="#about-section" class="hover:text-red-500 transition-colors">How It Works</a>
+                    <a href="#services-section" class="hover:text-red-500 transition-colors">Scam Stats</a>
+                    <a href="#contact-section" class="hover:text-red-500 transition-colors">About</a>
+                    <a href="#contact-section" class="hover:text-red-500 transition-colors">Contact Us</a>
+                </div>
+
+            </div>
+        </nav>
 
         <header id="top-header" class="h-32 bg-cyan-500"></header>
 
