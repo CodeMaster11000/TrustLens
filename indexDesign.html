@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrustLens — Inspect the Unseen Scams</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .scroll-reveal {
+                opacity: 0;
+                transform: translateY(18px);
+                transition: opacity 700ms ease, transform 700ms ease;
+            }
+
+            .scroll-reveal.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-menu {
+                max-height: 0;
+                opacity: 0;
+                transform: translateY(-8px);
+                overflow: hidden;
+                transition: max-height 280ms ease, opacity 220ms ease, transform 220ms ease;
+            }
+
+            .nav-menu.is-open {
+                max-height: 240px;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .toggle-icon {
+                transition: transform 220ms ease;
+            }
+
+            .toggle-icon.is-open {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-red-600 selection:text-white">
     <div class="min-h-screen flex flex-col">
@@ -29,6 +69,12 @@
                     <a href="#contact-section" class="hover:text-red-500 transition-colors">About</a>
                 </div>
 
+                <button id="nav-toggle" type="button" class="inline-flex items-center justify-center rounded-lg border border-neutral-800 bg-neutral-900/70 p-2 text-neutral-200 transition-colors hover:border-red-800 hover:text-red-400 md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                    <svg class="toggle-icon h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
                 <!-- Action Button -->
                 <div class="flex items-center">
                     <a href="detector.html" class="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] hover:bg-red-700 hover:shadow-[0_0_20px_rgba(220,38,38,0.7)] transition-all">
@@ -37,11 +83,19 @@
                 </div>
 
             </div>
+
+            <div id="mobile-nav" class="nav-menu border-b border-neutral-800/80 bg-neutral-950/95 px-4 md:hidden">
+                <div class="mx-auto flex max-w-7xl flex-col gap-3 py-4 text-sm font-medium text-neutral-300">
+                    <a href="#about-section" class="rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-3 transition-colors hover:border-red-800 hover:text-red-400">How It Works</a>
+                    <a href="#services-section" class="rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-3 transition-colors hover:border-red-800 hover:text-red-400">Scam Stats</a>
+                    <a href="#contact-section" class="rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-3 transition-colors hover:border-red-800 hover:text-red-400">About</a>
+                </div>
+            </div>
         </nav>
 
         <main id="main-content" class="flex-1 bg-neutral-950">
             
-            <section id="hero-section" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+            <section id="hero-section" class="scroll-reveal relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
 
                 <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-red-900/20 blur-[120px] rounded-full pointer-events-none"></div>
 
@@ -111,7 +165,7 @@
             </section>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 pb-16 lg:pb-20">
-                <section id="about-section" class="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_30px_rgba(127,29,29,0.15)] sm:p-8 lg:p-10">
+                <section id="about-section" class="scroll-reveal relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_30px_rgba(127,29,29,0.15)] sm:p-8 lg:p-10">
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.12),_transparent_35%)]"></div>
                     <div class="relative z-10">
                         <div class="mb-10 text-center">
@@ -154,7 +208,7 @@
                     </div>
                 </section>
 
-                <section id="services-section" class="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_30px_rgba(127,29,29,0.15)] sm:p-8 lg:p-10">
+                <section id="services-section" class="scroll-reveal relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_30px_rgba(127,29,29,0.15)] sm:p-8 lg:p-10">
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(239,68,68,0.12),_transparent_30%)]"></div>
                     <div class="relative z-10 grid gap-8 lg:grid-cols-[1.35fr_0.65fr]">
                         <div>
@@ -245,7 +299,7 @@
                     </div>
                 </section>
 
-                <section id="contact-section" class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_30px_rgba(127,29,29,0.15)] sm:p-8 lg:p-10">
+                <section id="contact-section" class="scroll-reveal rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_30px_rgba(127,29,29,0.15)] sm:p-8 lg:p-10">
                     <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                         <div>
                             <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-red-400/90">About TrustLens</p>
@@ -325,5 +379,6 @@
             © TrustLens Scam Detector.
         </footer>
     </div>
+    <script src="indexScript.js"></script>
 </body>
 </html>
