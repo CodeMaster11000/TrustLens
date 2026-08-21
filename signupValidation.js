@@ -15,6 +15,7 @@ if (signupForm) {
     const clearError = (input) => {
       input.classList.remove('border-red-500', 'ring-red-500/20');
       input.classList.add('border-neutral-700');
+      input.removeAttribute('aria-invalid');
 
       const errorText = input.parentElement?.querySelector('.field-error');
       if (errorText) {
@@ -26,11 +27,14 @@ if (signupForm) {
       isValid = false;
       input.classList.remove('border-neutral-700');
       input.classList.add('border-red-500', 'ring-2', 'ring-red-500/20');
+      input.setAttribute('aria-invalid', 'true');
 
       let errorContainer = input.parentElement?.querySelector('.field-error');
       if (!errorContainer) {
         errorContainer = document.createElement('p');
         errorContainer.className = 'field-error mt-2 text-xs text-red-400';
+        errorContainer.setAttribute('role', 'alert');
+        errorContainer.setAttribute('aria-live', 'assertive');
         input.parentElement.appendChild(errorContainer);
       }
 
@@ -76,13 +80,11 @@ if (signupForm) {
     }
 
     if (goalSelect) {
-      goalSelect.classList.remove('border-red-500', 'ring-red-500/20');
-      goalSelect.classList.add('border-neutral-700');
+      clearError(goalSelect);
       const goalValue = goalSelect.value;
 
       if (!goalValue) {
-        goalSelect.classList.add('border-red-500', 'ring-2', 'ring-red-500/20');
-        isValid = false;
+        showError(goalSelect, 'Please select a primary goal.');
       }
     }
 
@@ -90,9 +92,48 @@ if (signupForm) {
       updatesCheckbox.setCustomValidity('');
     }
 
-    if (isValid) {
-      alert('Account created successfully!');
-      signupForm.reset();
+    const focusFirstError = () => {
+      const firstError = signupForm.querySelector('.field-error');
+      if (firstError) {
+        const input = firstError.parentElement.querySelector('input, select, textarea');
+        input?.focus();
+        input?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    const showToast = (message, type = 'info', timeout = 3500) => {
+      let container = document.getElementById('tl-toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'tl-toast-container';
+        container.className = 'fixed top-6 right-6 z-50 flex flex-col gap-3';
+        document.body.appendChild(container);
+      }
+
+      const toast = document.createElement('div');
+      // use 'alert' for errors so assistive tech announces immediately, 'status' for success/info
+      toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+      toast.className = `max-w-sm rounded-lg px-4 py-3 shadow-lg text-sm font-medium text-white ${
+        type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-red-600' : 'bg-neutral-800'
+      }`;
+      toast.textContent = message;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => toast.remove(), 320);
+      }, timeout);
+    };
+
+    if (!isValid) {
+      focusFirstError();
+      showToast('Please fix the highlighted fields and try again.', 'error', 4000);
+      return;
     }
+
+    // Successful client-side validation — show non-blocking toast and reset
+    showToast('Account created successfully!', 'success', 3000);
+    signupForm.reset();
   });
 }
