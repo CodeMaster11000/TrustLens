@@ -9,8 +9,41 @@ if (signupForm) {
     const passwordInput = signupForm.querySelector('input[name="password"]');
     const goalSelect = signupForm.querySelector('select[name="goal"]');
     const updatesCheckbox = signupForm.querySelector('input[name="updates"]');
+    const successBanner = document.getElementById('signup-success-banner');
 
     let isValid = true;
+
+    const hideSuccessBanner = () => {
+      if (!successBanner) {
+        return;
+      }
+
+      successBanner.classList.add('hidden');
+      successBanner.setAttribute('aria-hidden', 'true');
+    };
+
+    const showSuccessBanner = (message) => {
+      if (!successBanner) {
+        return;
+      }
+
+      const headline = successBanner.querySelector('p');
+      const body = successBanner.querySelectorAll('p')[1];
+
+      if (headline) {
+        headline.textContent = message;
+      }
+
+      if (body) {
+        body.textContent = 'Your signup details are ready to be sent to the backend when you connect it.';
+      }
+
+      successBanner.classList.remove('hidden');
+      successBanner.removeAttribute('aria-hidden');
+      successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+
+    hideSuccessBanner();
 
     const clearError = (input) => {
       input.classList.remove('border-red-500', 'ring-red-500/20');
@@ -111,7 +144,6 @@ if (signupForm) {
       }
 
       const toast = document.createElement('div');
-      // use 'alert' for errors so assistive tech announces immediately, 'status' for success/info
       toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
       toast.className = `max-w-sm rounded-lg px-4 py-3 shadow-lg text-sm font-medium text-white ${
         type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-red-600' : 'bg-neutral-800'
@@ -131,8 +163,7 @@ if (signupForm) {
       showToast('Please fix the highlighted fields and try again.', 'error', 4000);
       return;
     }
-
-    // Successful client-side validation — show non-blocking toast and reset
+    showSuccessBanner('Account created successfully.');
     showToast('Account created successfully!', 'success', 3000);
     signupForm.reset();
   });
