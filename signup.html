@@ -10,9 +10,25 @@
             scroll-behavior: smooth;
         }
 
+        @keyframes banner-in {
+            from {
+                opacity: 0;
+                transform: translateY(-8px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         .glass-panel {
             background: rgba(17, 17, 17, 0.78);
             backdrop-filter: blur(16px);
+        }
+
+        .banner-enter {
+            animation: banner-in 260ms ease-out both;
         }
     </style>
 </head>
@@ -99,10 +115,19 @@
                         </div>
 
                         <form class="space-y-5" action="#" method="post">
-                            <div id="signup-success-banner" class="hidden rounded-xl border border-emerald-500/40 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200" role="status" aria-live="polite">
-                                <p class="font-semibold text-emerald-100">Account created successfully.</p>
-                                <p class="mt-1 text-emerald-200/80">Your signup details are ready to be sent to the backend when you connect it.</p>
-                            </div>
+                                <div id="signup-success-banner" class="hidden rounded-xl border border-emerald-500/40 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200" role="status" aria-live="polite">
+                                    <div class="flex items-start gap-3">
+                                        <span class="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300">
+                                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </span>
+                                        <div>
+                                            <p class="signup-success-title font-semibold text-emerald-100">Account created successfully.</p>
+                                            <p class="signup-success-body mt-1 text-emerald-200/80">Your signup details are ready to be sent to the backend when you connect it.</p>
+                                        </div>
+                                    </div>
+                                </div>
 
                             <div class="grid gap-4 sm:grid-cols-2">
                                 <label class="block text-sm text-neutral-300">

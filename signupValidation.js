@@ -27,8 +27,8 @@ if (signupForm) {
         return;
       }
 
-      const headline = successBanner.querySelector('p');
-      const body = successBanner.querySelectorAll('p')[1];
+      const headline = successBanner.querySelector('.signup-success-title');
+      const body = successBanner.querySelector('.signup-success-body');
 
       if (headline) {
         headline.textContent = message;
@@ -39,6 +39,9 @@ if (signupForm) {
       }
 
       successBanner.classList.remove('hidden');
+      successBanner.classList.remove('banner-enter');
+      void successBanner.offsetWidth;
+      successBanner.classList.add('banner-enter');
       successBanner.removeAttribute('aria-hidden');
       successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     };

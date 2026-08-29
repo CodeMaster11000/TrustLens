@@ -94,6 +94,20 @@
                         </div>
 
                         <form class="space-y-5" action="#" method="post">
+                            <div id="login-success-banner" class="hidden rounded-xl border border-emerald-500/40 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200" role="status" aria-live="polite">
+                                <div class="flex items-start gap-3">
+                                    <span class="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300">
+                                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </span>
+                                    <div>
+                                        <p class="login-success-title font-semibold text-emerald-100">Signed in successfully.</p>
+                                        <p class="login-success-body mt-1 text-emerald-200/80">You can now continue to your saved reports and scans.</p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <label class="block text-sm text-neutral-300">
                                 <span class="mb-2 block font-medium">Email</span>
                                 <input
@@ -146,5 +160,6 @@
             © TrustLens Scam Detector.
         </footer>
     </div>
+    <script src="loginValidation.js"></script>
 </body>
 </html>
