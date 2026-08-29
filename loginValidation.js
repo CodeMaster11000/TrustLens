@@ -1,15 +1,12 @@
-const signupForm = document.querySelector('form');
+const loginForm = document.querySelector('form');
 
-if (signupForm) {
-  signupForm.addEventListener('submit', function (event) {
+if (loginForm) {
+  loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const fullNameInput = signupForm.querySelector('input[name="full_name"]');
-    const emailInput = signupForm.querySelector('input[name="email"]');
-    const passwordInput = signupForm.querySelector('input[name="password"]');
-    const goalSelect = signupForm.querySelector('select[name="goal"]');
-    const updatesCheckbox = signupForm.querySelector('input[name="updates"]');
-    const successBanner = document.getElementById('signup-success-banner');
+    const emailInput = loginForm.querySelector('input[name="email"]');
+    const passwordInput = loginForm.querySelector('input[name="password"]');
+    const successBanner = document.getElementById('login-success-banner');
 
     let isValid = true;
 
@@ -27,21 +24,18 @@ if (signupForm) {
         return;
       }
 
-      const headline = successBanner.querySelector('.signup-success-title');
-      const body = successBanner.querySelector('.signup-success-body');
+      const title = successBanner.querySelector('.login-success-title');
+      const body = successBanner.querySelector('.login-success-body');
 
-      if (headline) {
-        headline.textContent = message;
+      if (title) {
+        title.textContent = message;
       }
 
       if (body) {
-        body.textContent = 'Your signup details are ready to be sent to the backend when you connect it.';
+        body.textContent = 'You can now continue to your saved reports and scans.';
       }
 
       successBanner.classList.remove('hidden');
-      successBanner.classList.remove('banner-enter');
-      void successBanner.offsetWidth;
-      successBanner.classList.add('banner-enter');
       successBanner.removeAttribute('aria-hidden');
       successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     };
@@ -77,19 +71,6 @@ if (signupForm) {
       errorContainer.textContent = message;
     };
 
-    if (fullNameInput) {
-      clearError(fullNameInput);
-      const nameValue = fullNameInput.value.trim();
-
-      if (!nameValue) {
-        showError(fullNameInput, 'Full name is required.');
-      } else if (nameValue.length < 2) {
-        showError(fullNameInput, 'Name must be at least 2 characters long.');
-      } else if (!/^[a-zA-Z\s.'-]+$/.test(nameValue)) {
-        showError(fullNameInput, 'Use letters and spaces only.');
-      }
-    }
-
     if (emailInput) {
       clearError(emailInput);
       const emailValue = emailInput.value.trim();
@@ -108,40 +89,23 @@ if (signupForm) {
 
       if (!passwordValue) {
         showError(passwordInput, 'Password is required.');
-      } else if (passwordValue.length < 8) {
-        showError(passwordInput, 'Password must be at least 8 characters long.');
-      } else if (!/[A-Za-z]/.test(passwordValue) || !/\d/.test(passwordValue)) {
-        showError(passwordInput, 'Password must include letters and numbers.');
       }
-    }
-
-    if (goalSelect) {
-      clearError(goalSelect);
-      const goalValue = goalSelect.value;
-
-      if (!goalValue) {
-        showError(goalSelect, 'Please select a primary goal.');
-      }
-    }
-
-    if (updatesCheckbox) {
-      updatesCheckbox.setCustomValidity('');
     }
 
     const focusFirstError = () => {
-      const firstError = signupForm.querySelector('.field-error');
+      const firstError = loginForm.querySelector('.field-error');
       if (firstError) {
-        const input = firstError.parentElement.querySelector('input, select, textarea');
+        const input = firstError.parentElement?.querySelector('input, select, textarea');
         input?.focus();
         input?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     };
 
-    const showToast = (message, type = 'info', timeout = 3500) => {
-      let container = document.getElementById('tl-toast-container');
+    const showToast = (message, type = 'info', timeout = 3000) => {
+      let container = document.getElementById('tl-login-toast-container');
       if (!container) {
         container = document.createElement('div');
-        container.id = 'tl-toast-container';
+        container.id = 'tl-login-toast-container';
         container.className = 'fixed top-6 right-6 z-50 flex flex-col gap-3';
         document.body.appendChild(container);
       }
@@ -166,8 +130,9 @@ if (signupForm) {
       showToast('Please fix the highlighted fields and try again.', 'error', 4000);
       return;
     }
-    showSuccessBanner('Account created successfully.');
-    showToast('Account created successfully!', 'success', 3000);
-    signupForm.reset();
+
+    showSuccessBanner('Signed in successfully.');
+    showToast('Signed in successfully!', 'success', 3000);
+    loginForm.reset();
   });
 }
