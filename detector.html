@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrustLens — Scam Detector</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-neutral-950 text-white">
+  <div class="max-w-6xl mx-auto p-6">
+    <nav class="flex items-center justify-between mb-8 border-b border-neutral-800 pb-4">
+      <div class="text-xl font-bold">Trust<span class="text-red-500">Lens</span></div>
+      <a href="indexDesign.html" class="text-sm text-neutral-300">Back to Home</a>
+    </nav>
+
+    <main class="grid md:grid-cols-[1.2fr_0.8fr] gap-6">
+      <section class="rounded-2xl border border-neutral-800 bg-neutral-900 p-5">
+        <p class="text-xs uppercase tracking-[0.2em] text-red-400 mb-3">Scam Detector</p>
+        <h1 class="text-2xl font-bold mb-4">Check a job offer</h1>
+        <textarea class="w-full h-52 rounded-xl border border-neutral-700 bg-neutral-950 p-3 text-sm" placeholder="Paste a job description, recruiter email, or hiring message here..."></textarea>
+        <div class="mt-4 flex gap-3">
+          <button class="bg-red-600 px-4 py-2 rounded-lg font-medium">Analyze listing</button>
+          <button class="border border-neutral-700 px-4 py-2 rounded-lg text-neutral-300">Clear</button>
+        </div>
+      </section>
+
+      <aside class="rounded-2xl border border-red-900/40 bg-red-950/10 p-5">
+        <p class="text-xs uppercase tracking-[0.2em] text-red-300 mb-3">Result</p>
+        <div class="text-4xl font-bold text-red-400">84%</div>
+        <div class="mt-2 text-sm text-red-200">High risk</div>
+        <div class="mt-5 space-y-3">
+          <div class="rounded-lg border border-neutral-800 bg-neutral-950/40 p-3">Urgent language</div>
+          <div class="rounded-lg border border-neutral-800 bg-neutral-950/40 p-3">Wire transfer request</div>
+          <div class="rounded-lg border border-neutral-800 bg-neutral-950/40 p-3">No interview process</div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="mt-6 grid md:grid-cols-3 gap-4">
+      <div class="rounded-2xl border border-neutral-800 bg-neutral-900 p-4"><h3 class="font-semibold mb-2">Red flags</h3><p class="text-sm text-neutral-400">Fake recruiter email, payment demand, urgency.</p></div>
+      <div class="rounded-2xl border border-neutral-800 bg-neutral-900 p-4"><h3 class="font-semibold mb-2">Signals</h3><p class="text-sm text-neutral-400">Poor grammar, generic offer, missing company details.</p></div>
+      <div class="rounded-2xl border border-neutral-800 bg-neutral-900 p-4"><h3 class="font-semibold mb-2">Verdict</h3><p class="text-sm text-neutral-400">This listing appears suspicious and should be treated carefully.</p></div>
+    </section>
+  </div>
+</body>
+</html>
