@@ -1,6 +1,6 @@
 function isValidFullName(fullName) {
   const nameValue = fullName.trim();
-  return Boolean(nameValue) && nameValue.length >= 0 && /^[a-zA-Z\s.'-]+$/.test(nameValue);
+  return Boolean(nameValue) && nameValue.length >= 2 && /^[a-zA-Z\s.'-]+$/.test(nameValue);
 }
 
 function isValidEmail(email) {
@@ -8,7 +8,7 @@ function isValidEmail(email) {
 }
 
 function isValidPassword(password) {
-  return password.length >= 10 && /[A-Za-z]/.test(password) && /\d/.test(password);
+  return password.length >= 8 && /[A-Za-z]/.test(password) && /\d/.test(password);
 }
 
 function isValidGoal(goal) {
