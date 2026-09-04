@@ -1,0 +1,34 @@
+{
+  "name": "trustlens",
+  "version": "1.0.0",
+  "description": "> Replace every angle-bracket placeholder below. The hygiene check in CI will > fail until you do.",
+  "main": "indexScript.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "check-js": "node --check indexScript.js && node --check signupValidation.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeMaster11000/TrustLens.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CodeMaster11000/TrustLens/issues"
+  },
+  "homepage": "https://github.com/CodeMaster11000/TrustLens#readme",
+  "devDependencies": {
+    "@eslint/css": "^2.0.0",
+    "@eslint/js": "^10.0.1",
+    "@html-eslint/eslint-plugin": "^0.65.0",
+    "eslint": "^10.9.1",
+    "globals": "^17.12.0",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}
