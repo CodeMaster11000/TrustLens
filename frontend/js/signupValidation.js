@@ -1,7 +1,25 @@
-const signupForm = document.querySelector('form');
+function isValidFullName(fullName) {
+  const nameValue = fullName.trim();
+  return Boolean(nameValue) && nameValue.length >= 2 && /^[a-zA-Z\s.'-]+$/.test(nameValue);
+}
 
-if (signupForm) {
-  signupForm.addEventListener('submit', function (event) {
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function isValidPassword(password) {
+  return password.length >= 8 && /[A-Za-z]/.test(password) && /\d/.test(password);
+}
+
+function isValidGoal(goal) {
+  return Boolean(goal);
+}
+
+if (typeof document !== 'undefined') {
+  const signupForm = document.querySelector('form');
+
+  if (signupForm) {
+    signupForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     const fullNameInput = signupForm.querySelector('input[name="full_name"]');
@@ -77,7 +95,7 @@ if (signupForm) {
       errorContainer.textContent = message;
     };
 
-    if (fullNameInput) {
+      if (fullNameInput) {
       clearError(fullNameInput);
       const nameValue = fullNameInput.value.trim();
 
@@ -90,7 +108,7 @@ if (signupForm) {
       }
     }
 
-    if (emailInput) {
+      if (emailInput) {
       clearError(emailInput);
       const emailValue = emailInput.value.trim();
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -102,7 +120,7 @@ if (signupForm) {
       }
     }
 
-    if (passwordInput) {
+      if (passwordInput) {
       clearError(passwordInput);
       const passwordValue = passwordInput.value;
 
@@ -115,11 +133,11 @@ if (signupForm) {
       }
     }
 
-    if (goalSelect) {
+      if (goalSelect) {
       clearError(goalSelect);
       const goalValue = goalSelect.value;
 
-      if (!goalValue) {
+      if (!isValidGoal(goalValue)) {
         showError(goalSelect, 'Please select a primary goal.');
       }
     }
@@ -161,13 +179,24 @@ if (signupForm) {
       }, timeout);
     };
 
-    if (!isValid) {
-      focusFirstError();
-      showToast('Please fix the highlighted fields and try again.', 'error', 4000);
-      return;
-    }
-    showSuccessBanner('Account created successfully.');
-    showToast('Account created successfully!', 'success', 3000);
-    signupForm.reset();
-  });
+      if (!isValid) {
+        focusFirstError();
+        showToast('Please fix the highlighted fields and try again.', 'error', 4000);
+        return;
+      }
+
+      showSuccessBanner('Account created successfully.');
+      showToast('Account created successfully!', 'success', 3000);
+      signupForm.reset();
+    });
+  }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    isValidFullName,
+    isValidEmail,
+    isValidPassword,
+    isValidGoal,
+  };
 }
