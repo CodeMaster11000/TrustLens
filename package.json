@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "eslint . --ext .js",
-    "check-js": "node --check indexScript.js && node --check signupValidation.js"
+    "check-js": "node --check frontend/js/indexScript.js && node --check frontend/js/signupValidation.js"
   },
   "repository": {
     "type": "git",
