@@ -21,10 +21,11 @@ pipeline {
 
                     test -f package.json
                     test -d frontend
-                    test -d frontend/pages || test -d src
-                    test -d frontend/js || test -d src
+                    test -d frontend/pages
+                    test -d frontend/js
 
-                    find frontend -type f \( -name "*.html" -o -name "*.js" \) | grep -q .
+                    find frontend -type f -name "*.html" | grep -q .
+                    find frontend -type f -name "*.js" | grep -q .
 
                     echo "Project structure looks valid."
                 '''
